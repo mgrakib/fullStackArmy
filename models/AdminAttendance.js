@@ -1,18 +1,11 @@
-const { Schema, model } = require('mongoose');
-const { addListener } = require('./Profile');
-
+const { Schema, Model } = require('mongoose')
 
 const adminAttendanceSchema = new Schema({
-    timeLimited: Number,
-    status: String,
-    createdAt: Date
-})
+	timeLimit: Number,
+	status: String,
+	createdAt: Date,
+});
 
 
-
-const AdminAttendance = model(
-	"AdminAttendance",
-	adminAttendanceSchema
-);
-
+const AdminAttendance = Model("AdminAttendance", adminAttendanceSchema);
 module.exports = AdminAttendance;

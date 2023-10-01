@@ -1,6 +1,6 @@
 /** @format */
 
-const { Schema, model } = require("mongoose");
+const { Schema, Model } = require("mongoose");
 
 const studentAttendanceSchema = new Schema({
 	createdAt: Date,
@@ -14,6 +14,5 @@ const studentAttendanceSchema = new Schema({
 	},
 });
 
-const StudentAttendance = model("StudentAttendance", studentAttendanceSchema);
-
-module.exports = StudentAttendance;
+const StudentAttendance  = Model("StudentAttendance ", studentAttendanceSchema);
+module.exports = StudentAttendance ;
