@@ -13,7 +13,6 @@ async function authenticate(req, res, next) {
     }
         token = token.split(' ')[1]
         
-        console.log(token)
       var decoded = jwt.verify(token, "secret-key");
       const user = await User.findById(decoded._id);
 

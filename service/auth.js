@@ -4,7 +4,13 @@ const bcrypt = require("bcrypt");
 const jwt =  require('jsonwebtoken')
 const { findUserByProperty, creteUser } = require("./user");
 const error = require("../utils/error");
-const registerService = async ({ name, password, email }) => {
+const registerService = async ({
+	name,
+	password,
+	email,
+	roles,
+	accountStatus,
+}) => {
 	const user = await findUserByProperty("email", email);
 
 	if (user) {
@@ -12,10 +18,16 @@ const registerService = async ({ name, password, email }) => {
 		throw errorS;
 	}
 
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+	const salt = await bcrypt.genSalt(10);
+	const hash = await bcrypt.hash(password, salt);
 
-	return creteUser({ name, password: hash, email });
+	return creteUser({
+		name,
+		password: hash,
+		email,
+		roles,
+		accountStatus,
+	});
 };
 
 
