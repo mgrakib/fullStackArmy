@@ -1,0 +1,162 @@
+[
+	{
+		"name": "UTC+00:00",
+		"offset": 0,
+		"abbreviation": "UTC"
+	},
+	{
+		"name": "UTC+01:00",
+		"offset": 60,
+		"abbreviation": "CET"
+	},
+	{
+		"name": "UTC+02:00",
+		"offset": 120,
+		"abbreviation": "EET"
+	},
+	{
+		"name": "UTC+03:00",
+		"offset": 180,
+		"abbreviation": "MSK"
+	},
+	{
+		"name": "UTC+03:30",
+		"offset": 210,
+		"abbreviation": "IRST"
+	},
+	{
+		"name": "UTC+04:00",
+		"offset": 240,
+		"abbreviation": "GST"
+	},
+	{
+		"name": "UTC+04:30",
+		"offset": 270,
+		"abbreviation": "AFT"
+	},
+	{
+		"name": "UTC+05:00",
+		"offset": 300,
+		"abbreviation": "PKT"
+	},
+	{
+		"name": "UTC+05:30",
+		"offset": 330,
+		"abbreviation": "IST"
+	},
+	{
+		"name": "UTC+05:45",
+		"offset": 345,
+		"abbreviation": "NPT"
+	},
+	{
+		"name": "UTC+06:00",
+		"offset": 360,
+		"abbreviation": "BST"
+	},
+	{
+		"name": "UTC+06:30",
+		"offset": 390,
+		"abbreviation": "MMT"
+	},
+	{
+		"name": "UTC+07:00",
+		"offset": 420,
+		"abbreviation": "ICT"
+	},
+	{
+		"name": "UTC+08:00",
+		"offset": 480,
+		"abbreviation": "CST"
+	},
+	{
+		"name": "UTC+09:00",
+		"offset": 540,
+		"abbreviation": "JST"
+	},
+	{
+		"name": "UTC+09:30",
+		"offset": 570,
+		"abbreviation": "ACST"
+	},
+	{
+		"name": "UTC+10:00",
+		"offset": 600,
+		"abbreviation": "AEST"
+	},
+	{
+		"name": "UTC+11:00",
+		"offset": 660,
+		"abbreviation": "AEDT"
+	},
+	{
+		"name": "UTC+12:00",
+		"offset": 720,
+		"abbreviation": "NZST"
+	},
+	{
+		"name": "UTC-01:00",
+		"offset": -60,
+		"abbreviation": "AZOT"
+	},
+	{
+		"name": "UTC-02:00",
+		"offset": -120,
+		"abbreviation": "GST"
+	},
+	{
+		"name": "UTC-02:30",
+		"offset": -150,
+		"abbreviation": "NFT"
+	},
+	{
+		"name": "UTC-03:00",
+		"offset": -180,
+		"abbreviation": "UYT"
+	},
+	{
+		"name": "UTC-03:30",
+		"offset": -210,
+		"abbreviation": "NST"
+	},
+	{
+		"name": "UTC-04:00",
+		"offset": -240,
+		"abbreviation": "AST"
+	},
+	{
+		"name": "UTC-04:30",
+		"offset": -270,
+		"abbreviation": "VET"
+	},
+	{
+		"name": "UTC-05:00",
+		"offset": -300,
+		"abbreviation": "EST"
+	},
+	{
+		"name": "UTC-06:00",
+		"offset": -360,
+		"abbreviation": "CST"
+	},
+	{
+		"name": "UTC-07:00",
+		"offset": -420,
+		"abbreviation": "MST"
+	},
+	{
+		"name": "UTC-08:00",
+		"offset": -480,
+		"abbreviation": "PST"
+	},
+	{
+		"name": "UTC-09:00",
+		"offset": -540,
+		"abbreviation": "AKST"
+	},
+	{
+		"name": "UTC-10:00",
+		"offset": -600,
+		"abbreviation": "HST"
+	}
+]

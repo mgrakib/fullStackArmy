@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import SelectInput from './Components/SelectInput'
+import timeZones from '../public/timeZone.json'
+import { useState } from 'react'
+import { deepCopy } from './utils/object';
 
+
+const init = {
+	ownTime: {
+		name: "UTC+00:00",
+		offset: 0,
+		abbreviation: "UTC",
+	},
+	client1: { name: "UTC+00:00", offset: 0, abbreviation: "UTC" },
+};
 function App() {
-  const [count, setCount] = useState(0)
+  const [clockInfo, setClockInfo] = useState(deepCopy(init));
+  
+  const convertTime = (e) => {
+      console.log(clockInfo)
+  }
 
+
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+		<>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					padding: "20px 0px",
+				}}
+			>
+				<p>this is app</p>
+				<div>
+					<SelectInput onChange={convertTime}>
+						<option value=''>Select Your Time Zone</option>
+						{timeZones.map(timeZone => (
+							<option
+								key={timeZone.name}
+								value={timeZone.offset}
+							>
+								{timeZone.name}
+							</option>
+						))}
+					</SelectInput>
+				</div>
+			</div>
+		</>
+  );
 }
 
 export default App
