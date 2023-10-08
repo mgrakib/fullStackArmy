@@ -1,15 +1,16 @@
-import { useState } from "react";
+/** @format */
+
+import { useEffect, useState } from "react";
 import Card from "../../Shared/Card/Card";
 import useGetTime from "../../hooks/useGetTime";
 
-const LocalClock = ({ date, timeZone, offset }) => {
+const LocalClock = ({ clock, setLocalClock }) => {
 	return (
 		<div>
 			<Card
-				date={date}
-                title={"My Clock"}
-                timeZone={timeZone}
-                offset={offset}
+				clock={clock}
+                setLocalClock={setLocalClock}
+                local
 			/>
 		</div>
 	);

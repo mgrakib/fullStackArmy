@@ -1,10 +1,19 @@
+import Card from "../../Shared/Card/Card";
 
-const ClientsClock = () => {
+const ClientsClock = ({ clientClock, setClientClock }) => {
+	
     return (
-        <div>
-            clients clocks ...
-        </div>
-    );
+		<div>
+			{clientClock.map(client => (
+				<Card
+					key={client.id}
+					clock={client}
+					clientClock={clientClock}
+					setClientClock={setClientClock}
+				/>
+			))}
+		</div>
+	);
 };
 
 export default ClientsClock;
