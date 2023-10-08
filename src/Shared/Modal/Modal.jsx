@@ -11,18 +11,15 @@ const INTI = {
 	timeZone: "",
 	offset: "",
 };
-const Modal = ({ setModalOpen, handelSubmit }) => {
-	const [formValue, setFormValue] = useState( {...INTI} );
+const Modal = ({ setModalOpen, handelSubmit, isUpdate }) => {
+	const [formValue, setFormValue] = useState({ ...INTI });
 
 	const handelChange = e => {
 		const { name, value } = e.target;
-		console.log(name)
 
 		setFormValue({ ...formValue, [name]: value });
 	};
 
-
-	console.log(formValue)
 	return (
 		<form
 			onSubmit={e => {
@@ -58,7 +55,7 @@ const Modal = ({ setModalOpen, handelSubmit }) => {
 					}}
 				>
 					<div>
-						<Text>Update OWN Clock</Text>
+						<Text>{isUpdate ? "Update" : 'Add New'} Clock</Text>
 					</div>
 					<div
 						style={{
@@ -82,25 +79,27 @@ const Modal = ({ setModalOpen, handelSubmit }) => {
 							<option value={"UTC"}>UTC</option>
 							<option value={"PST"}>PST</option>
 						</Select>
-						<Select
-							name='offset'
-							onChange={handelChange}
-							value={formValue.offset}
-						>
-							<option>Select Your Time Offset</option>
-							<option value={1}>+1</option>
-							<option value={2}>+2</option>
-							<option value={3}>+3</option>
-							<option value={4}>+4</option>
-							<option value={5}>+5</option>
-							<option value={6}>+6</option>
-							<option value={-1}>-1</option>
-							<option value={-2}>-2</option>
-							<option value={-3}>-3</option>
-							<option value={-4}>-4</option>
-							<option value={-5}>-5</option>
-							<option value={-6}>-6</option>
-						</Select>
+						{formValue.timeZone === "UTC" && (
+							<Select
+								name='offset'
+								onChange={handelChange}
+								value={formValue.offset}
+							>
+								<option>Select Your Time Offset</option>
+								<option value={1}>+1</option>
+								<option value={2}>+2</option>
+								<option value={3}>+3</option>
+								<option value={4}>+4</option>
+								<option value={5}>+5</option>
+								<option value={6}>+6</option>
+								<option value={-1}>-1</option>
+								<option value={-2}>-2</option>
+								<option value={-3}>-3</option>
+								<option value={-4}>-4</option>
+								<option value={-5}>-5</option>
+								<option value={-6}>-6</option>
+							</Select>
+						)}
 					</div>
 					<div style={{ display: "flex", gap: "5px" }}>
 						<Button

@@ -32,7 +32,7 @@ const useGetTime = (timeZone, offset) => {
 				setLocalTime(localTime)
 				const dateArr = localTime.toUTCString().split(' ')
 				setLocalTimeZone(dateArr.pop());
-				console.log('this is local time', localTime)
+				
 			}
 		}
 
