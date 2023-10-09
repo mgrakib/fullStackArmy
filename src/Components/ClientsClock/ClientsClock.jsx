@@ -6,6 +6,8 @@ const ClientsClock = ({
 	handelDelete,
 	handelUpdateClient,
 	events,
+	handelEvent,
+	handelEventDelete
 }) => {
 	return (
 		<div style={{ display: "flex", gap: "20px" }}>
@@ -21,6 +23,8 @@ const ClientsClock = ({
 						handelDelete={handelDelete}
 						handelUpdateClient={handelUpdateClient}
 						events={events}
+						handelEvent={handelEvent}
+						handelEventDelete={handelEventDelete}
 					/>
 				))
 			)}

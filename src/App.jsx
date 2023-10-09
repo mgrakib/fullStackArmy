@@ -3,75 +3,44 @@
 import { useState } from "react";
 import ClientsClock from "./Components/ClientsClock/ClientsClock";
 import LocalClock from "./Components/LocalClock/LocalClock";
-import useGetTime from "./hooks/useGetTime";
+import shortid from "shortid";
 
 const LOCAL_CLOCK_INTI = {
 	title: "LOCAL CLOCK",
 	timeZone: "",
 	offset: 0,
-	id:'ownClock'
+	id: "ownClock",
 };
 
-const CLIENT_CLOCK_INIT = [
-	{
-		title: "LOCAL CLOCK",
-		timeZone: "",
-		offset: 0,
-		id:1
-	},
-];
+const CLIENT_CLOCK_INIT = [];
 
-const EVENT_INIT = [
-	{
-		eventId: 1,
-		eventTitle: "This is Event",
-		eventStartTime: 10.1,
-		eventEndTime: 10.1,
-		clockId: 1,
-	},
-	{
-		eventId: 2,
-		eventTitle: "This is Event seocond",
-		eventStartTime: 10.1,
-		eventEndTime: 10.1,
-		clockId: 2,
-	},
-	{
-		eventId: 3,
-		eventTitle: "This is Event third",
-		eventStartTime: 10.1,
-		eventEndTime: 10.1,
-		clockId: 2,
-	},
-	{
-		eventId: 4,
-		eventTitle: "This is Own Event",
-		eventStartTime: 10.1,
-		eventEndTime: 10.1,
-		clockId: "ownClock",
-	},
-];
+const EVENT_INIT = [];
 
 const App = () => {
 	const [localClock, setLocalClock] = useState({ ...LOCAL_CLOCK_INTI });
 	const [clientClock, setClientClock] = useState([...CLIENT_CLOCK_INIT]);
 	const [events, setEvents] = useState([...EVENT_INIT]);
-	
+
 	// const [clockEvent, setClockEvent] = useState([])
 
-
 	// events functions
-	const handelFilterEvents = (clockId) => {
-		// const ce = events.filter(evetn => evetn.if === clockId);
-		// setEvents(ce)
+	const handelEvent = eventInfo => {
+		const eventId = shortid.generate();
+		setEvents([...events, { ...eventInfo, eventId }]);
 	};
 
+	const handelEventDelete = eventId => {
+		const newEvent = events.filter(event => event.eventId !== eventId)
 
-
-	// clock functions 
+		setEvents([...newEvent])
+	}
+	
+	// clock functions
 	const handelDelete = clockId => {
 		const existClock = clientClock.filter(clock => clock.id !== clockId);
+		const existEvent = events.filter(event => event.clockId !== clockId);
 		setClientClock(existClock);
+		setEvents(existEvent)
 	};
 	const handelUpdateClient = value => {
 		const updateClock = clientClock.map(clock => {
@@ -83,16 +52,16 @@ const App = () => {
 
 		setClientClock([...updateClock]);
 	};
-	const handelUpdateLocal = (formValue) => {
+	const handelUpdateLocal = formValue => {
 		setLocalClock({
 			...localClock,
 			...formValue,
 		});
-	}
+	};
 
-	const handelAdd = (newClient) => {
-		setClientClock([...clientClock, newClient])
-	}
+	const handelAdd = newClient => {
+		setClientClock([...clientClock, newClient]);
+	};
 	return (
 		<div>
 			<LocalClock
@@ -103,6 +72,8 @@ const App = () => {
 				handelUpdateLocal={handelUpdateLocal}
 				handelAdd={handelAdd}
 				events={events}
+				handelEvent={handelEvent}
+				handelEventDelete={handelEventDelete}
 			/>
 
 			<div style={{ marginTop: "30px", display: "flex", width: "100vw" }}>
@@ -112,6 +83,8 @@ const App = () => {
 					handelDelete={handelDelete}
 					handelUpdateClient={handelUpdateClient}
 					events={events}
+					handelEvent={handelEvent}
+					handelEventDelete={handelEventDelete}
 				/>
 			</div>
 		</div>

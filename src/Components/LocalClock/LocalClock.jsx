@@ -12,6 +12,8 @@ const LocalClock = ({
 	handelUpdateLocal,
 	handelAdd,
 	events,
+	handelEvent,
+	handelEventDelete,
 }) => {
 	return (
 		<div>
@@ -24,6 +26,8 @@ const LocalClock = ({
 				handelUpdateLocal={handelUpdateLocal}
 				handelAdd={handelAdd}
 				events={events}
+				handelEvent={handelEvent}
+				handelEventDelete={handelEventDelete}
 			/>
 		</div>
 	);

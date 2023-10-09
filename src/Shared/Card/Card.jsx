@@ -5,6 +5,8 @@ import Text from "../../UI/Text";
 import Button from "../../UI/Button";
 import Modal from "../Modal/Modal";
 import useGetTime from "../../hooks/useGetTime";
+import EventForm from "../Modal/EventForm";
+import EventList from "../../Components/EventList/EventList";
 
 const Card = ({
 	clock,
@@ -17,11 +19,29 @@ const Card = ({
 	handelUpdateLocal,
 	handelAdd,
 	events,
+	handelEvent,
+	handelEventDelete,
 }) => {
 	const [clockEvents, setClockEvents] = useState([]);
+	const handelUpdateEvent = eventInfo => {
+		const newEvent = clockEvents.map(e => {
+			if (e.eventId === eventInfo.eventId) {
+				return eventInfo;
+			} else {
+				return e;
+			}
+		});
+
+		setClockEvents([...newEvent]);
+	};
 	const [modalOpen, setModalOpen] = useState({
 		isOpen: false,
 		isUpdate: true,
+	});
+	const [eventModalOpen, seteventModalOpen] = useState({
+		isOpen: false,
+		isUpdate: true,
+		targetEventIt: "",
 	});
 	const {
 		clock: localClock,
@@ -71,8 +91,6 @@ const Card = ({
 		const c = events.filter(event => event.clockId === clock.id);
 		setClockEvents(c);
 	}, [events, clock.id]);
-	
-
 
 	return (
 		<div>
@@ -120,18 +138,26 @@ const Card = ({
 					</Button>
 				)}
 
-				<Button>Create Event</Button>
+				<Button
+					onClick={() => {
+						seteventModalOpen({
+							...eventModalOpen,
+							isOpen: true,
+							isUpdate: false,
+						});
+					}}
+				>
+					Create Event
+				</Button>
 			</div>
 
 			<div>
-				{clockEvents.map(clockEvent => {
-					console.log(clockEvent)
-					return (
-						<div key={clockEvent.eventId}>
-							{clockEvent.eventTitle}
-						</div>
-					);
-				})}
+				<EventList
+					clockEvents={clockEvents}
+					eventModalOpen={eventModalOpen}
+					seteventModalOpen={seteventModalOpen}
+					handelEventDelete={handelEventDelete}
+				/>
 			</div>
 
 			{modalOpen.isOpen && (
@@ -139,6 +165,17 @@ const Card = ({
 					handelSubmit={handelSubmit}
 					setModalOpen={setModalOpen}
 					isUpdate={modalOpen.isUpdate}
+				/>
+			)}
+
+			{eventModalOpen.isOpen && (
+				<EventForm
+					handelEvent={handelEvent}
+					handelUpdateEvent={handelUpdateEvent}
+					seteventModalOpen={seteventModalOpen}
+					isUpdate={eventModalOpen.isUpdate}
+					clockId={clock.id}
+					eventId={eventModalOpen.targetEventIt}
 				/>
 			)}
 		</div>
