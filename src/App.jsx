@@ -1,9 +1,10 @@
 /** @format */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClientsClock from "./Components/ClientsClock/ClientsClock";
 import LocalClock from "./Components/LocalClock/LocalClock";
 import shortid from "shortid";
+import useEvent from "./hooks/useEvent";
 
 const LOCAL_CLOCK_INTI = {
 	title: "LOCAL CLOCK",
@@ -62,6 +63,23 @@ const App = () => {
 	const handelAdd = newClient => {
 		setClientClock([...clientClock, newClient]);
 	};
+
+
+	// event chekc 
+	const { getEvent, getEventsByClockID, addEvent, event } = useEvent();
+
+
+	useEffect(() => {
+		if (Object.keys(event).length === 0) {
+			addEvent({ title: "Test", clockId:'clock-111'})
+		}
+		// console.log('get all event', getEvent())
+		// console.log('get all event', getEvent(true))
+		// console.log("get all event", getEventsByClockID("clock-111"));
+	} , [])
+
+
+
 	return (
 		<div>
 			<LocalClock

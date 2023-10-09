@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 import useGetTime from "../../hooks/useGetTime";
 import EventForm from "../Modal/EventForm";
 import EventList from "../../Components/EventList/EventList";
+import { addSeconds } from "date-fns";
 
 const Card = ({
 	clock,
@@ -43,12 +44,13 @@ const Card = ({
 		isUpdate: true,
 		targetEventIt: "",
 	});
+
 	const {
 		clock: localClock,
 		offset,
 		timeZone,
 	} = useGetTime(clock.timeZone, clock.offset);
-
+	const [timer, setTimer] = useState(localClock);
 	const handelSubmit = formValue => {
 		if (modalOpen.isUpdate) {
 			{
@@ -92,10 +94,27 @@ const Card = ({
 		setClockEvents(c);
 	}, [events, clock.id]);
 
+	useEffect(() => {
+		setTimer(localClock);
+	}, [localClock]);
+	let timerId = null;
+	useEffect(() => {
+		if (!timer || timerId !== null) return;
+
+		timerId = setInterval(() => {
+			setTimer(addSeconds(timer, 1));
+		}, 1000);
+
+		return () => {
+			clearInterval(timerId);
+		};
+	}, [timer]);
+
+	console.log(localClock, timer);
 	return (
 		<div>
 			<Text>Title: {clock.title}</Text>
-			<Text>{localClock && localClock.toLocaleString()}</Text>
+			<Text>{timer && timer.toLocaleString()}</Text>
 			<Text>
 				{timeZone}{" "}
 				{(clock?.timeZone === "UTC" ||
