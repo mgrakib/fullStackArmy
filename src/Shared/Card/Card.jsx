@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Text from "../../UI/Text";
 import Button from "../../UI/Button";
 import Modal from "../Modal/Modal";
@@ -16,7 +16,9 @@ const Card = ({
 	handelUpdateClient,
 	handelUpdateLocal,
 	handelAdd,
+	events,
 }) => {
+	const [clockEvents, setClockEvents] = useState([]);
 	const [modalOpen, setModalOpen] = useState({
 		isOpen: false,
 		isUpdate: true,
@@ -51,7 +53,10 @@ const Card = ({
 				handelUpdateClient({ ...formValue, id: clock.id });
 			}
 		} else {
-			const id = clientClock[clientClock.length - 1].id + 1;
+			console.log(clientClock);
+			const id = clientClock[clientClock.length - 1]?.id
+				? clientClock[clientClock.length - 1]?.id + 1
+				: 1;
 
 			const newClient = {
 				id,
@@ -61,6 +66,13 @@ const Card = ({
 			// setClientClock([...clientClock, newClient]);
 		}
 	};
+
+	useEffect(() => {
+		const c = events.filter(event => event.clockId === clock.id);
+		setClockEvents(c);
+	}, [events, clock.id]);
+	
+
 
 	return (
 		<div>
@@ -107,6 +119,19 @@ const Card = ({
 						Delete
 					</Button>
 				)}
+
+				<Button>Create Event</Button>
+			</div>
+
+			<div>
+				{clockEvents.map(clockEvent => {
+					console.log(clockEvent)
+					return (
+						<div key={clockEvent.eventId}>
+							{clockEvent.eventTitle}
+						</div>
+					);
+				})}
 			</div>
 
 			{modalOpen.isOpen && (

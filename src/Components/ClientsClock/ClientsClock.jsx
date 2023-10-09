@@ -5,19 +5,25 @@ const ClientsClock = ({
 	setClientClock,
 	handelDelete,
 	handelUpdateClient,
+	events,
 }) => {
 	return (
 		<div style={{ display: "flex", gap: "20px" }}>
-			{clientClock.length === 0 ? <p>There has no clock | Please Add</p> : clientClock.map(client => (
-				<Card
-					key={client.id}
-					clock={client}
-					clientClock={clientClock}
-					setClientClock={setClientClock}
-					handelDelete={handelDelete}
-					handelUpdateClient={handelUpdateClient}
-				/>
-			))}
+			{clientClock.length === 0 ? (
+				<p>There has no clock | Please Add</p>
+			) : (
+				clientClock.map(client => (
+					<Card
+						key={client.id}
+						clock={client}
+						clientClock={clientClock}
+						setClientClock={setClientClock}
+						handelDelete={handelDelete}
+						handelUpdateClient={handelUpdateClient}
+						events={events}
+					/>
+				))
+			)}
 		</div>
 	);
 };
