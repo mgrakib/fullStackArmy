@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import useGetTime from "../../hooks/useGetTime";
 import EventForm from "../Modal/EventForm";
 import EventList from "../../Components/EventList/EventList";
-import { addSeconds } from "date-fns";
+import { addSeconds, formatDistance } from "date-fns";
 
 const Card = ({
 	clock,
@@ -22,6 +22,7 @@ const Card = ({
 	events,
 	handelEvent,
 	handelEventDelete,
+	localClock:localClockState,
 }) => {
 	const [clockEvents, setClockEvents] = useState([]);
 	const handelUpdateEvent = eventInfo => {
@@ -45,12 +46,15 @@ const Card = ({
 		targetEventIt: "",
 	});
 
-	const {
-		clock: localClock,
-		offset,
-		timeZone,
-	} = useGetTime(clock.timeZone, clock.offset);
+	// const {
+	// 	clock: localClock,
+	// 	offset,
+	// 	timeZone,
+	// } = useGetTime(clock.timeZone, clock.offset);
+
+
 	const [timer, setTimer] = useState(localClock);
+
 	const handelSubmit = formValue => {
 		if (modalOpen.isUpdate) {
 			{
@@ -75,7 +79,7 @@ const Card = ({
 				handelUpdateClient({ ...formValue, id: clock.id });
 			}
 		} else {
-			console.log(clientClock);
+			
 			const id = clientClock[clientClock.length - 1]?.id
 				? clientClock[clientClock.length - 1]?.id + 1
 				: 1;
@@ -97,20 +101,23 @@ const Card = ({
 	useEffect(() => {
 		setTimer(localClock);
 	}, [localClock]);
+
 	let timerId = null;
+	// useEffect(() => {
+	// 	if (!timer || timerId !== null) return;
+
+	// 	timerId = setInterval(() => {
+	// 		setTimer(addSeconds(timer, 1));
+	// 	}, 1000);
+
+	// 	return () => {
+	// 		clearInterval(timerId);
+	// 	};
+	// }, [timer]);
+
 	useEffect(() => {
-		if (!timer || timerId !== null) return;
-
-		timerId = setInterval(() => {
-			setTimer(addSeconds(timer, 1));
-		}, 1000);
-
-		return () => {
-			clearInterval(timerId);
-		};
-	}, [timer]);
-
-	console.log(localClock, timer);
+		console.log(localClockState);
+	}, [localClockState]);
 	return (
 		<div>
 			<Text>Title: {clock.title}</Text>

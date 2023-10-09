@@ -26,7 +26,6 @@ const useGetTime = (timeZone, offset) => {
 				offset = TIME_OFFSET[timeZone] ?? offset;
 				const time = addMinutes(utc, (offset))
 				setLocalTime(time)
-
 			} else {
 				const localTime = addMinutes(utc, -localOffset)
 				setLocalTime(localTime)
@@ -43,10 +42,10 @@ const useGetTime = (timeZone, offset) => {
 
 	
 	return {
-		clock: localTime,
+		date: localTime,
 		timeZone: timeZone || localTimeZone,
-		offset: offset || -(localOffset),
-		
+		offset: offset || -localOffset,
+		dateUtc: utc,
 	};
 };
 

@@ -1,33 +1,35 @@
+import { useState } from "react";
 import Card from "../../Shared/Card/Card";
+import Modal from "../../Shared/Modal/Modal";
+import ClientClockCard from "./ClientClockCard";
 
 const ClientsClock = ({
-	clientClock,
-	setClientClock,
+	clientClocks,
 	handelDelete,
 	handelUpdateClient,
-	events,
+	localClock,
 	handelEvent,
-	handelEventDelete
+	handelEventDelete,
+	handelUpdateEvent,
+	events,
 }) => {
 	return (
-		<div style={{ display: "flex", gap: "20px" }}>
-			{clientClock.length === 0 ? (
-				<p>There has no clock | Please Add</p>
-			) : (
-				clientClock.map(client => (
-					<Card
-						key={client.id}
-						clock={client}
-						clientClock={clientClock}
-						setClientClock={setClientClock}
-						handelDelete={handelDelete}
+		<div>
+			<div style={{ display: "flex", gap: "20px" }}>
+				{clientClocks.map(clock => (
+					<ClientClockCard
+						key={clock.id}
+						clock={clock}
 						handelUpdateClient={handelUpdateClient}
-						events={events}
+						handelDelete={handelDelete}
+						localClock={localClock}
 						handelEvent={handelEvent}
 						handelEventDelete={handelEventDelete}
+						handelUpdateEvent={handelUpdateEvent}
+						events={events}
 					/>
-				))
-			)}
+				))}
+			</div>
 		</div>
 	);
 };
